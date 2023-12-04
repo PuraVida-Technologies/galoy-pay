@@ -1,0 +1,13 @@
+name: PuraVida Build and Deploy
+on:
+  push:
+    branches:
+      - 'puravida-production'
+
+jobs:
+  build-and-push:
+    uses: PuraVida-Technologies/pura-vida-shared-workflows/.github/workflows/production/google-cloud/docker-build-and-push.yaml@main
+    with:
+      APP_NAME: "galoy-pay"
+      CACHE_KEY_PATH: "yarn.lock"
+      GKE_PROJECT: "responsive-edge-344815"

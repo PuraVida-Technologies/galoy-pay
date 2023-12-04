@@ -10,3 +10,5 @@ to a different branch/version later on.
 4. Adjusted nav header padding in `/components/Layouts/app-layout.module.css`
 5. Updated config values in `/config/config.ts`
 6. Updated `lib/config/config.ts` to default to PuraVida domains
+7. Updated `.github` with build and public deploy configuration for PuraVida
+   - All Galoy configs were moved to `/.github.galoy.backup`
