@@ -16,7 +16,7 @@ jobs:
 
   build_and_push:
     name: Build & Push
-    uses: PuraVida-Technologies/pura-vida-shared-workflows/.github/workflows/production/google-cloud/docker-build-and-push.yaml@main
+    uses: PuraVida-Technologies/pura-vida-shared-workflows/.github/workflows/gcr-docker-build-and-push.yaml@main
     with:
       APP_NAME: "galoy-pay"
       CACHE_KEY_PATH: "yarn.lock"
