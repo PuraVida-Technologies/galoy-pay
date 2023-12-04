@@ -9,6 +9,7 @@ on:
 jobs:
   build_and_push:
     name: We be out here
+    runs-on: ubuntu-latest
     steps:
       - name: Print Env
         run: printenv
