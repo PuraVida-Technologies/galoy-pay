@@ -7,7 +7,6 @@ on:
     tags-ignore:
       - '**'
 
-# test
 jobs:
   build_and_push:
     name: Build & Push
@@ -16,3 +15,4 @@ jobs:
       APP_NAME: "galoy-pay"
       CACHE_KEY_PATH: "yarn.lock"
       GKE_PROJECT: "responsive-edge-344815"
+      PACKAGE_MANAGER: "yarn"
