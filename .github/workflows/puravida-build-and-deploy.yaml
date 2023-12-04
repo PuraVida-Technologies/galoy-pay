@@ -2,15 +2,16 @@ name: PuraVida Build and Deploy
 on:
   push:
     branches:
-#      - '**'
       - 'puravida-production'
     tags-ignore:
       - '**'
 
 jobs:
   build_and_push:
-    - name: Print Env
-      run: printenv
+    name: We be out here
+    steps:
+      - name: Print Env
+        run: printenv
 
 #  build-and-push:
 #    uses: PuraVida-Technologies/pura-vida-shared-workflows/.github/workflows/production/google-cloud/docker-build-and-push.yaml@main
