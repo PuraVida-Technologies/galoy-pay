@@ -132,25 +132,34 @@ const AppLayout = ({ children, username }: Props) => {
       <div className={styles.divider}></div>
       <main className={`${openSideBar && styles.main_bg} ${styles.main}`}>
         {children}
-        <div className={styles.footer}>
-          <div className={styles.footer_text}>
-            <p>
-              Bitcoin Beach Wallet is being renamed to Blink. Learn more:{" "}
-              <a href={`https://${URL_HOST_DOMAIN}`} target="_blank" rel="noreferrer">
-                {URL_HOST_DOMAIN}
-              </a>
-            </p>
-          </div>
-          <a href="https://galoy.io" target="_blank" rel="noreferrer">
-            <span>Powered by</span>
-            <Image
-              src="/icons/galoy-logo-text-icon.svg"
-              alt="galoy-logo"
-              width={50}
-              height={50}
-            />
-          </a>
-        </div>
+        {/* --- PuraVida Modifications ----------------------------------------------------------------------------- */}
+        {/*                                                                                                          */}
+        {/*   1. Commented out the Galoy Footer - LC 12/3/23                                                         */}
+        {/*                                                                                                          */}
+        {/*   See: `/puravida/PURAVIDA-CHANGELOG.md` for more info.                                                  */}
+        {/*                                                                                                          */}
+        {/* -------------------------------------------------------------------------------------------------------- */}
+        {/*                                                                                                          */}
+        {/*<div className={styles.footer}>*/}
+        {/*  <div className={styles.footer_text}>*/}
+        {/*    <p>*/}
+        {/*      Bitcoin Beach Wallet is being renamed to Blink. Learn more:{" "}*/}
+        {/*      <a href={`https://${URL_HOST_DOMAIN}`} target="_blank" rel="noreferrer">*/}
+        {/*        {URL_HOST_DOMAIN}*/}
+        {/*      </a>*/}
+        {/*    </p>*/}
+        {/*  </div>*/}
+        {/*  <a href="https://galoy.io" target="_blank" rel="noreferrer">*/}
+        {/*    <span>Powered by</span>*/}
+        {/*    <Image*/}
+        {/*      src="/icons/galoy-logo-text-icon.svg"*/}
+        {/*      alt="galoy-logo"*/}
+        {/*      width={50}*/}
+        {/*      height={50}*/}
+        {/*    />*/}
+        {/*  </a>*/}
+        {/*</div>*/}
+        {/* --- End PuraVida Modifications ------------------------------------------------------------------------- */}
       </main>
     </div>
   )
