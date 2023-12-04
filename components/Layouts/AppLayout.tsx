@@ -39,7 +39,16 @@ const AppLayout = ({ children, username }: Props) => {
     <div className={`${openSideBar && styles.container_bg} ${styles.container}`}>
       <nav className={styles.nav_bar}>
         <a href={`/${username}`} style={{ cursor: "pointer" }}>
-          <Image src="/icons/blink-logo-icon.svg" alt="logo" width="50" height="50" />
+          {/* --- PuraVida Modifications --------------------------------------------------------------------------- */}
+          {/*                                                                                                        */}
+          {/*   3. Changed logo filename - LC 12/3/23                                                                */}
+          {/*                                                                                                        */}
+          {/*   See: `/puravida/PURAVIDA-CHANGELOG.md` for more info.                                                */}
+          {/*                                                                                                        */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/*                                                                                                        */}
+          <Image src="/icons/puravida-logo-icon.svg" alt="logo" width="50" height="50" />
+          {/* --- /PuraVida Modifications -------------------------------------------------------------------------- */}
         </a>
         <div onClick={() => setOpenSideBar(!openSideBar)} className={styles.hamburger}>
           <span className={`${openSideBar && styles.toggle}`}></span>
