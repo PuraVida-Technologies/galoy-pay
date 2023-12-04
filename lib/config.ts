@@ -16,7 +16,7 @@ if (!GRAPHQL_HOSTNAME) {
   */
 
   if (typeof window !== "undefined") {
-    let hostParts = window.location.host.split(".")
+    const hostParts = window.location.host.split(".")
     hostParts[0] = "api"
     GRAPHQL_HOSTNAME = hostParts.join(".")
   } else {
