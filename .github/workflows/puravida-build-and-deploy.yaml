@@ -7,13 +7,6 @@ on:
       - '**'
 
 jobs:
-#  build_and_push:
-#    name: We be out here
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Print Env
-#        run: printenv
-
   build_and_push:
     name: Build & Push
     uses: PuraVida-Technologies/pura-vida-shared-workflows/.github/workflows/gcr-docker-build-and-push.yaml@main
