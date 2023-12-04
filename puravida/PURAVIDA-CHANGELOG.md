@@ -12,3 +12,4 @@ to a different branch/version later on.
 6. Updated `lib/config/config.ts` to default to PuraVida domains
 7. Updated `.github` with build and public deploy configuration for PuraVida
    - All Galoy configs were moved to `/.github.galoy.backup`
+   - Added workflow calls to `PuraVida-Technologies/pura-vida-shared-workflows`
