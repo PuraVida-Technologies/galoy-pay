@@ -7,17 +7,25 @@ const GRAPHQL_HOSTNAME_INTERNAL = process.env.GRAPHQL_HOSTNAME_INTERNAL as strin
 
 // FIXME: remove once dns has been migrated out of ln.bitcoinbeach.com
 if (!GRAPHQL_HOSTNAME) {
+  /*
+  --- PuraVida Modifications -------------------------------------------------------------------------------------------
+
+    6. Updated logic to default to PuraVida domains - LC 12/3/23
+
+  ----------------------------------------------------------------------------------------------------------------------
+  */
+
   if (typeof window !== "undefined") {
     let hostParts = window.location.host.split(".")
-    if (hostParts.length <= 3) {
-      // throw new Error("Missing env variables")
-      hostParts = "pay.mainnet.galoy.io".split(".")
-    }
     hostParts[0] = "api"
     GRAPHQL_HOSTNAME = hostParts.join(".")
   } else {
-    GRAPHQL_HOSTNAME = "api.mainnet.galoy.io"
+    GRAPHQL_HOSTNAME = "pay.puravidabitcoin.io"
   }
+
+  /*
+  --- /PuraVida Modifications ------------------------------------------------------------------------------------------
+  */
 }
 
 const GRAPHQL_URI_INTERNAL = `http://${GRAPHQL_HOSTNAME_INTERNAL}/graphql`

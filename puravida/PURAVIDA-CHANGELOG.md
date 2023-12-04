@@ -9,3 +9,4 @@ to a different branch/version later on.
 3. Changed logo filename in `/components/Layouts/AppLayout.tsx`
 4. Adjusted nav header padding in `/components/Layouts/app-layout.module.css`
 5. Updated config values in `/config/config.ts`
+6. Updated `lib/config/config.ts` to default to PuraVida domains
