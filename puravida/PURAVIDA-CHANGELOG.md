@@ -7,3 +7,5 @@ to a different branch/version later on.
 1. Removed the Galoy footer from `/components/Layouts/AppLayout.tsx`
 2. Added `/public/icons/puravida-logo-icon.svg`
 3. Changed logo filename in `/components/Layouts/AppLayout.tsx`
+4. Adjusted nav header padding in `/components/Layouts/app-layout.module.css`
+5. Updated config values in `/config/config.ts`
