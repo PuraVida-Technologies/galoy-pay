@@ -2,7 +2,8 @@ name: PuraVida Build and Deploy
 on:
   push:
     branches:
-      - 'puravida-production'
+      - '**'
+#      - 'puravida-production'
     tags-ignore:
       - '**'
 
