@@ -13,3 +13,7 @@ to a different branch/version later on.
 7. Updated `.github` with build and public deploy configuration for PuraVida
    - All Galoy configs were moved to `/.github.galoy.backup`
    - Added workflow calls to `PuraVida-Technologies/pura-vida-shared-workflows`
+
+```
+deploy test
+```
