@@ -37,7 +37,7 @@ const AppLayout = ({ children, username }: Props) => {
 
   return (
     <div className={`${openSideBar && styles.container_bg} ${styles.container}`}>
-      <nav className={styles.nav_bar}>
+      <nav className={`${styles.nav_bar}`}>
         <a href={`/${username}`} style={{ cursor: "pointer" }}>
           {/* --- PuraVida Modifications --------------------------------------------------------------------------- */}
           {/*                                                                                                        */}
