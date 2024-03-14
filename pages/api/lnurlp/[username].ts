@@ -50,12 +50,14 @@ const LNURL_INVOICE = gql`
     $walletId: WalletId!
     $amount: SatAmount!
     $descriptionHash: Hex32Bytes!
+    $memo: Memo
   ) {
     mutationData: lnInvoiceCreateOnBehalfOfRecipient(
       input: {
         recipientWalletId: $walletId
         amount: $amount
         descriptionHash: $descriptionHash
+        memo: $memo
       }
     ) {
       errors {
@@ -83,6 +85,7 @@ type CreateInvoiceParams = {
   walletId: string
   amount: number
   descriptionHash: string
+  memo?: string
 }
 
 async function createInvoice(params: CreateInvoiceParams): Promise<CreateInvoiceOutput> {
@@ -131,7 +134,7 @@ if (nostrEnabled) {
 export default async function (req: NextApiRequest, res: NextApiResponse) {
   console.log(NOSTR_PUBKEY)
 
-  const { username, amount, nostr } = req.query
+  const { username, amount, nostr, text } = req.query
   const url = originalUrl(req)
   const accountUsername = username ? username.toString() : ""
 
@@ -191,6 +194,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
       walletId,
       amount: amountSats,
       descriptionHash,
+      ...(text ? { memo: text.toString() } : {}),
     })
 
     if ((errors && errors.length) || !invoice) {
@@ -210,7 +214,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
       routes: [],
     })
   } catch (err: unknown) {
-    console.log("unexpected error getting invoice", err)
+    console.log("unexpected error getting invoice", JSON.stringify(err))
     res.json({
       status: "ERROR",
       reason: err instanceof Error ? err.message : "unexpected error",
