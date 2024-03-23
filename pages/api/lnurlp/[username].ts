@@ -182,7 +182,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
       })
     }
 
-    let invoiceVariables: Partial<CreateInvoiceParams> = {}
+    const invoiceVariables: Partial<CreateInvoiceParams> = {}
 
     if (nostrEnabled && nostr) {
       invoiceVariables["descriptionHash"] = crypto
