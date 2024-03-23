@@ -6,10 +6,9 @@ import originalUrl from "original-url";
 import ReactToPrint from "react-to-print";
 import { bech32 } from "bech32";
 import { QRCode } from "react-qrcode-logo";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { URL_HOST_DOMAIN } from "../../config/config";
 import { Button } from "react-bootstrap";
-import { useState } from "react";
 
 export async function getServerSideProps({
   req,
