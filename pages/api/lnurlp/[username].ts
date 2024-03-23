@@ -159,6 +159,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
       maxSendable: 100000000000,
       metadata: metadata,
       tag: "payRequest",
+      commentAllowed: 2000,
       ...(nostrEnabled
         ? {
             allowsNostr: true,
@@ -184,13 +185,15 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 
     const invoiceVariables: Partial<CreateInvoiceParams> = {}
 
+    if (comment) {
+      invoiceVariables["memo"] = comment
+    }
+
     if (nostrEnabled && nostr) {
       invoiceVariables["descriptionHash"] = crypto
         .createHash("sha256")
         .update(nostr)
         .digest("hex")
-    } else if (comment) {
-      invoiceVariables["memo"] = comment.toString()
     } else {
       invoiceVariables["descriptionHash"] = crypto
         .createHash("sha256")
