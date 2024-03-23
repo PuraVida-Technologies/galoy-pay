@@ -186,7 +186,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     const invoiceVariables: Partial<CreateInvoiceParams> = {}
 
     if (comment) {
-      invoiceVariables["memo"] = comment
+      invoiceVariables["memo"] = comment.toString()
     }
 
     if (nostrEnabled && nostr) {
