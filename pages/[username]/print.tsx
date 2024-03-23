@@ -8,6 +8,8 @@ import { bech32 } from "bech32";
 import { QRCode } from "react-qrcode-logo";
 import { useRef } from "react";
 import { URL_HOST_DOMAIN } from "../../config/config";
+import { Button } from "react-bootstrap";
+import { useState } from "react";
 
 export async function getServerSideProps({
   req,
@@ -32,11 +34,12 @@ export async function getServerSideProps({
   // Note: add the port to the webURL for local development
   const webURL = `${url.protocol}//${url.hostname}/${username}`;
 
-  const qrCodeURL = (webURL + "?lightning=" + lnurl).toUpperCase();
+  const qrCodeURL = lnurl.toUpperCase();
 
   return {
     props: {
       qrCodeURL,
+      webURL,
       username,
       userHeader: `Pay ${username}@${URL_HOST_DOMAIN}`,
     },
@@ -45,15 +48,19 @@ export async function getServerSideProps({
 
 export default function ({
   qrCodeURL,
+  webURL,
   username,
   userHeader,
 }: {
   lightningAddress: string;
   qrCodeURL: string;
+  webURL: string;
   username: string;
   userHeader: string;
 }) {
   const componentRef = useRef<HTMLDivElement | null>(null);
+  const lnurlRL = "lightning:";
+  const [qrType, setQrType] = useState<"lnurl" | "web">("lnurl");
 
   return (
     <>
@@ -73,7 +80,7 @@ export default function ({
                     </p>
                     <QRCode
                       ecLevel="H"
-                      value={qrCodeURL}
+                      value={qrType === "lnurl" ? qrCodeURL : webURL}
                       size={800}
                       logoImage="/puravida-logo.png"
                       logoWidth={250}
@@ -109,7 +116,7 @@ export default function ({
                   </p>
                   <QRCode
                     ecLevel="H"
-                    value={qrCodeURL}
+                    value={qrType === "lnurl" ? qrCodeURL : webURL}
                     size={300}
                     logoImage="/puravida-logo.png"
                     logoWidth={75}
@@ -137,6 +144,12 @@ export default function ({
         <br />
       </Container>
       <Row className="justify-content-center">
+        <Button
+          style={{ marginRight: "1rem" }}
+          onClick={() => setQrType(qrType === "lnurl" ? "web" : "lnurl")}
+        >
+          {qrType === "lnurl" ? "Show Web URL" : "Show LNURL"}
+        </Button>
         <ReactToPrint
           trigger={() => (
             <button className="print-paycode-button">Print QR Code</button>
