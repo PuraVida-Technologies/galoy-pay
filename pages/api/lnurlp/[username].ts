@@ -49,7 +49,7 @@ const LNURL_INVOICE = gql`
   mutation lnInvoiceCreateOnBehalfOfRecipient(
     $walletId: WalletId!
     $amount: SatAmount!
-    $descriptionHash: Hex32Bytes!
+    $descriptionHash: Hex32Bytes
     $memo: Memo
   ) {
     mutationData: lnInvoiceCreateOnBehalfOfRecipient(
@@ -84,7 +84,7 @@ type CreateInvoiceOutput = {
 type CreateInvoiceParams = {
   walletId: string
   amount: number
-  descriptionHash: string
+  descriptionHash?: string
   memo?: string
 }
 
@@ -134,7 +134,7 @@ if (nostrEnabled) {
 export default async function (req: NextApiRequest, res: NextApiResponse) {
   console.log(NOSTR_PUBKEY)
 
-  const { username, amount, nostr, text } = req.query
+  const { username, amount, nostr, comment } = req.query
   const url = originalUrl(req)
   const accountUsername = username ? username.toString() : ""
 
@@ -182,19 +182,26 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
       })
     }
 
-    let descriptionHash: string
+    let invoiceVariables: Partial<CreateInvoiceParams> = {}
 
     if (nostrEnabled && nostr) {
-      descriptionHash = crypto.createHash("sha256").update(nostr).digest("hex")
+      invoiceVariables["descriptionHash"] = crypto
+        .createHash("sha256")
+        .update(nostr)
+        .digest("hex")
+    } else if (comment) {
+      invoiceVariables["memo"] = comment.toString()
     } else {
-      descriptionHash = crypto.createHash("sha256").update(metadata).digest("hex")
+      invoiceVariables["descriptionHash"] = crypto
+        .createHash("sha256")
+        .update(metadata)
+        .digest("hex")
     }
 
     const { invoice, errors } = await createInvoice({
       walletId,
       amount: amountSats,
-      descriptionHash,
-      ...(text ? { memo: text.toString() } : {}),
+      ...invoiceVariables,
     })
 
     if ((errors && errors.length) || !invoice) {
