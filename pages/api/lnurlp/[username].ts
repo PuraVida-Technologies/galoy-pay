@@ -98,6 +98,8 @@ async function createInvoice(params: CreateInvoiceParams): Promise<CreateInvoice
     variables: params,
   })
 
+  console.log("createInvoice", { errors, invoice }, params)
+
   return { errors, invoice }
 }
 
@@ -185,15 +187,13 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 
     const invoiceVariables: Partial<CreateInvoiceParams> = {}
 
-    if (comment) {
-      invoiceVariables["memo"] = comment.toString()
-    }
-
     if (nostrEnabled && nostr) {
       invoiceVariables["descriptionHash"] = crypto
         .createHash("sha256")
         .update(nostr)
         .digest("hex")
+    } else if (comment) {
+      invoiceVariables["memo"] = comment.toString()
     } else {
       invoiceVariables["descriptionHash"] = crypto
         .createHash("sha256")
